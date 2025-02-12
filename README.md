@@ -2,4 +2,4 @@
 
 Repository for Programming Exercise.
 
-See <docs/START.md>
+See [docs/START.md](/docs/START.md).
