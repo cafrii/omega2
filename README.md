@@ -1,2 +1,5 @@
 # omega2
-programming exercise
+
+Repository for Programming Exercise.
+
+See <docs/START.md>
