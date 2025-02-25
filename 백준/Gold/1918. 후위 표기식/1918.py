@@ -122,8 +122,41 @@ def solve(E) -> str:
 
 
 
+# without recursion, more simple
+
+def solve2(E:str):
+    stack = []
+    result = ''
+    for e in E:
+        if e.isalpha():
+            result += e
+        elif e == '(':
+            stack.append(e)
+        elif e == '*' or e == '/':
+            while stack and stack[-1] == '*' or stack[-1] == '/':
+                result += stack.pop()
+            stack.append(e)
+        elif e == '+' or e == '-':
+            while stack and stack[-1] != '(':
+                result += stack.pop()
+            stack.append(e)
+        else: # ')'
+            while stack and stack[-1] != '(':
+                result += stack.pop()
+            stack.pop()
+
+        # print(f"{e}, {stack}, '{result}'")
+
+    while stack:
+        result += stack.pop()
+
+    return result
+
+
+
 E = input().strip()
-print(solve(E))
+# print(solve(E))
+print(solve2(E))
 
 
 
