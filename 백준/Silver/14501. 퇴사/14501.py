@@ -78,30 +78,18 @@ def solve_recursive(Ti:list, Pi:list):
 
 
 def solve(Ti:list, Pi:list):
+    # dynamic programming
+
     N = len(Ti)
 
     max_price = [ 0 ] * N
     # max_price[i] 는 i+1 번째 날 부터 고려했을 때의 최대 이익
 
     def get_max_price(start):
+        # easy access method
         return max_price[start] if 0 <= start < N else 0
 
     for k in range(N-1, -1, -1):
-        # if k == N-1:
-        #     max_price[k] = Pi[k] if Ti[k] == 1 else 0
-
-        # case 1: take
-        #  if end day <= N-1
-        # if k + (Ti[k]-1) > N-1: # k + Ti[k] > N
-        #     max_price[k] = 0
-        #     continue
-        # else:
-        # max_price[k] = max(
-        #     Pi[k] + max_price[k + Ti[k]] if k + Ti[k] < N else 0, # take this job
-        #     max_price[k+1] if k < N-1 else 0)  # skip this job
-
-        # print(f"({k}) take[{k}]={p1}, skip[{k}]={p2}, max={max(p1, p2)}")
-        # return max(p1, p2)
 
         # take
         p1 = (Pi[k] if k + Ti[k] <= N else 0) + get_max_price(k + Ti[k])
@@ -111,7 +99,7 @@ def solve(Ti:list, Pi:list):
 
         max_price[k] = max(p1, p2)
 
-        print(f"({k}) take[{k}]={p1}, skip[{k}]={p2}, max={max(p1, p2)}")
+        # print(f"({k}) take[{k}]={p1}, skip[{k}]={p2}, max={max(p1, p2)}")
 
     return max_price[0]
 
@@ -126,6 +114,8 @@ for i in range(N):
 
 # print(solve_recursive(Ti, Pi))
 print(solve(Ti, Pi))
+
+
 
 '''
 
