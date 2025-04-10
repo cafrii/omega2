@@ -1,0 +1,25 @@
+
+
+4/10
+그래프 문제에서 시각화 된 그래프 확인하기. 나름 도움이 되는데, 노드 수가 많아지면 이마저도 쉽지 않음.
+https://csacademy.com/app/graph_editor/
+
+
+4/2~
+dijkstra 문제들 풀이. 가끔 dp 카테고리가 dijkstra 로 분류되어 있는 것들도 있음.
+
+2025/4/2
+dijkstra 문제를 풀려다가, 그 전에 먼저 heap que 숙지가 필요함을 확인.
+
+우선순위 큐
+https://www.acmicpc.net/problemset?sort=ac_desc&algo=59
+최대 힙에서 자체 구현을 한번 해 보았으니, 이후부터는 파이썬 heapq 를 활용하도록 한다.
+
+
+
+----
+2025년 3월, 요즘은 dynamic programming 파트의 문제를 주로 풀고 있음.
+먼저 정답 확률이 약 30% 정도로 낮은 것 들 부터 진행.
+
+https://www.acmicpc.net/problemset?sort=ac_desc&algo=25
+
