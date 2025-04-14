@@ -1,3 +1,11 @@
+PINNED
+https://solved.ac/profile/cafrii
+solved.ac 는 boj site 와 연동 시킬 수 있음. 여기에서 전체 상황을 보고 원하는 문제를 골라 풀 수 있음.
+
+4/14, greedy 쪽이 너무 적으니, 이 부분을 좀 더 채우자.
+
+
+
 
 4/11
 벨만 포드 알고리즘 문제 리스트
