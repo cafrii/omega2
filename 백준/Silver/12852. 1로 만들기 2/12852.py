@@ -34,6 +34,11 @@ X가 2로 나누어 떨어지면, 2로 나눈다.
     history 리스트를 유지할 경우, 약간 시간 제한을 넘는 것 같음. 그래서 일단 이전 dp index 만 기록 하고,
     맨 나중에 역추적하여 리스트를 생성하는 방식으로 변경했음.
 
+다른 해법들
+    dp 에 cnt 와 index 둘 다 추적하지 않고, 그냥 prev_index 만 추적하게 할 수도 있다.
+    그러면 1 -> N 까지 dp 채우는 것이 좀 더 빨라진다.
+    대신 나중에 답을 내는 과정에 좀 더 신경을 써야 함.
+
 '''
 
 import sys
@@ -78,9 +83,55 @@ def solve(N) -> tuple[int,list]:
     return dp[N][0], nums
 
 
+
+def solve2(N) -> tuple[int,list]:
+
+    dp = [ 0 ] * (N+1)
+    # dp[k] 는 참조한 이전 dp 의 index
+    dp[1] = 0
+
+    for k in range(2, N+1):
+        candidates = []  # (cnt, prev_dp_index)
+        kd2 = kd3 = -1
+        if k % 3 == 0:
+            kd3 = k // 3
+            if kd3 >= 1:
+                candidates.append(kd3)
+        if k % 2 == 0:
+            kd2 = k // 2
+            if kd2 != kd3 and kd2 >= 1:
+                candidates.append(kd2)
+        candidates.append(k - 1)
+
+        dp[k] = min(candidates)
+        # log('%d: cnt %d, %s', k, dp[k][0], dp[k][1])
+
+    # construct nums list, tracking dp, starting from dp[N]
+    count = 0
+    idx = N
+    nums = []
+    while idx >= 1:
+        nums.append(idx)
+        idx = dp[idx][1]
+        count += 1
+
+    return count-1, nums # count 에서는 마지막 1은 제외 해야 함.
+
+'''
+속도 비교
+solve()
+    0.44s user 0.03s system 17% cpu 2.609 total
+
+solve2()
+    0.24s user 0.01s system 10% cpu 2.380 total
+    거의 절반 정도로 시간이 단축되었음.
+
+'''
+
+
 N = int(input().strip())
 
-cnt,nums = solve(N)
+cnt,nums = solve2(N)
 print(cnt)
 print(' '.join([ str(x) for x in nums ]))
 
