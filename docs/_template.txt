@@ -1,0 +1,21 @@
+
+자주 사용되는 코드 조각들.
+
+c++ 코드
+
+#include <iostream>
+
+// stdint.h
+INT32_MAX, INT64_MAX, INTMAX_MAX //== INT64_MAX
+
+ios_base::sync_with_stdio(false);
+cin.tie(nullptr);
+
+int n, m;
+cin >> n >> m;
+cout << answer << endl;
+
+// 최소 큐로 동작 시키는 경우..
+priority_queue<T, vector<T>, greater<T>> pq;
+
+
