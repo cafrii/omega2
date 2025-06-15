@@ -1,41 +1,37 @@
+
 #include <iostream>
 #include <algorithm>
 #include <map>
 #include <deque>
 #include <sstream>
 
+
 using namespace std;
 
 /*
     custom graph type.
-    key: starting node
-    value: ending node list as vector<int>
+    key: start node
+    value: end node list as vector<int>
 */
 using Map = map<int,vector<int>>;
 
-/*
-    return sorted list of nodes with distance K.
-    guarantee non-empty.
-*/
 vector<int> solve(Map& map, int N, int K, int X)
 {
     auto que = deque<int>();
-        // we always push/pop two values simultaneously.
-        // first is node number, second is distance.
-    auto visited = vector<bool>(N+1, false);
+    auto mindist = vector<int>(N+1, -1); // [0] is not used.
     vector<int> answer;
 
     // now, start from node X.
-    que.push_back(X); que.push_back(0);
-    visited[X] = true;
+    que.push_back(X);
+    mindist[X] = 0;
 
     int cur; // visiting node
     int dist; // distance up to here
 
     while (!que.empty()) {
         cur = que.at(0);
-        dist = que.at(1);
-        que.pop_front(); que.pop_front();
+        dist = mindist[cur];
+        que.pop_front();
 
         if (dist == K) {
             answer.push_back(cur);
@@ -43,15 +39,13 @@ vector<int> solve(Map& map, int N, int K, int X)
         }
         if (dist > K) // no more need to continue.
             break;
-        // if (!map.contains(cur)).. // oops! this needs c++20
-        if (map.find(cur) == map.end()) // map does not have node-cur.
+        if (!map.contains(cur)) // map does not have node-cur.
             continue;
         for (auto nxt: map[cur]) {
-            if (visited[nxt])
+            if (mindist[nxt] >= 0)
                 continue;
             que.push_back(nxt);
-            que.push_back(dist + 1);
-            visited[nxt] = true;
+            mindist[nxt] = dist + 1;
         }
     }
     if (answer.empty())
@@ -60,6 +54,7 @@ vector<int> solve(Map& map, int N, int K, int X)
     sort(answer.begin(), answer.end());
     return answer;
 }
+
 
 int main()
 {
