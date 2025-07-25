@@ -1,4 +1,3 @@
-
 import sys
 
 def get_input():
@@ -24,9 +23,10 @@ def solve(N:int, lines:list[tuple[int,int]]):
 
     def find_root(node:int)->int:
         # 지정한 노드가 속한 트리의 root 를 찾아서 리턴.
-        while node != parent[node]:
-            node = parent[node]
-        return node
+        if node != parent[node]:
+            parent[node] = find_root(parent[node])
+            # 한번 찾아 둔 root는 parent[]에 저장해 둠.
+        return parent[node]
 
     for idx,(a,b) in enumerate(lines):
         root_a = find_root(a)
