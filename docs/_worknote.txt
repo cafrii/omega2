@@ -25,6 +25,7 @@ solved.ac 는 boj site 와 연동 시킬 수 있음. 여기에서 전체 상황�
 ## 완료한 문제
 
 
+7/27, 17219, 비밀번호 찾기, 실버4
 7/26, 16724, 피리 부는 사나이, 골드3  # grid, segmentation, bf
 7/25, 20040, 사이클 게임, 골드4  # disjoint set union, path compression
 7/24, 17404, RGB거리 2, 골드4  # dp 응용
