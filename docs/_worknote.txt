@@ -25,6 +25,7 @@ solved.ac 는 boj site 와 연동 시킬 수 있음. 여기에서 전체 상황�
 ## 완료한 문제
 
 
+7/30,  1647, 도시 분할 계획, 골드4, # mst (minimum spanning tree), kruscal, union find, disjoint set
 7/29, 27172, 수 나누기 게임, 골드4  # divide/modular optimization
 7/28,  1874, 스택 수열, 실버2
 7/27,  1106, 호텔, 골드4, # dp, knapsack 변형
