@@ -19,3 +19,23 @@ cout << answer << endl;
 priority_queue<T, vector<T>, greater<T>> pq;
 
 
+----------------
+
+
+import sys
+def log(fmt, *args): print(fmt % args, file=sys.stderr)
+
+def get_input():
+    input = sys.stdin.readline
+    N = int(input().rstrip())
+    return ...
+
+def solve():
+    pass
+
+
+if __name__ == '__main__':
+    inp = get_input()
+    r = solve(*inp)
+    print(r)
+
