@@ -1,4 +1,3 @@
-
 import sys
 
 def get_input():
@@ -6,24 +5,22 @@ def get_input():
     N,M = map(int, input().split())
     roads = []
     for _ in range(M):
-        x,y,z,w = map(int, input().split())
-        roads.append((x,y,z,w)) # x-y 길, 표지판 z, 통행료 w
+        roads.append(tuple(map(int, input().split()))) # x-y 길, 표지판 z, 통행료 w
     return N,roads
 
 def solve(N:int, roads:list[tuple[int,int,int,int]])->tuple[str,str]:
     '''
     mst 트리 구성. kruscal 알고리즘.
     '''
-    root = [ k for k in range(N+1) ] # 자신이 root 이면 single node tree.
+    root = list(range(N+1)) # 자신이 root 이면 single node tree.
 
     def find_root(a:int)->int:
-        if root[a] == a:
-            return a
+        if root[a] == a: return a
         root[a] = ra = find_root(root[a])
         return ra
 
     # 표지판 z 기준 정렬. 그 다음 w.
-    roads.sort(key = lambda r: (r[2],r[3]))
+    roads.sort(key=lambda r: r[2]*int(1e7) + r[3])
 
     sum_costs = 0 # sum of w
     signs = [] # z
@@ -41,7 +38,7 @@ def solve(N:int, roads:list[tuple[int,int,int,int]])->tuple[str,str]:
     if len(signs) != N-1:
         return '',''  # 솔루션 없음!
 
-    signs.sort()
+    #signs.sort()
     min_signs = ''.join(map(str, signs))
     return min_signs,str(sum_costs)
 
