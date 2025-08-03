@@ -1,4 +1,3 @@
-
 import sys
 import heapq
 from heapq import heappush,heappop
@@ -9,7 +8,6 @@ def get_input():
     mat = []
     for i in range(N):
         m = list(map(int, input().split()))
-        #assert len(m) == N, f'wrong row[{i}] length'
         mat.append(m)
     return mat
 
@@ -17,7 +15,6 @@ def solve_prim(mat:list[list[int]])->int:
     '''
     '''
     N = len(mat)
-    #assert len(mat[0]) == N, "wrong matrix dimension"
 
     # node indexing: node-0 is first node.
     visited = [0]*N
@@ -51,6 +48,8 @@ def solve_prim(mat:list[list[int]])->int:
             # 연결 후보 노드 nxt_node 와 연결 cost 를 힙큐에 추가.
             # 네트워크의 어느 노드와 연결되는지는 관심 사항 아님.
             heappush(hq, (nxt_cost, nxt_node))
+            costs[nxt_node] = nxt_cost
+
     return sum_costs
 
 
