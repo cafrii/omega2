@@ -25,6 +25,7 @@ solved.ac 는 boj site 와 연동 시킬 수 있음. 여기에서 전체 상황�
 ## 완료한 문제
 
 
+8/4,  17472, 다리 만들기 2, 골드1  # grid, segmentation/dfs, bruteforce, mst/kruscal
 8/3,  16398, 행성 연결, 골드4  # mst (prim)
 8/2,  16398, 행성 연결, 골드4  # mst (kruscal)
 8/1,   1922, 네트워크 연결, 골드4  # mst
