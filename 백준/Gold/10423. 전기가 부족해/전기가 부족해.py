@@ -1,4 +1,5 @@
 import sys
+from heapq import heappush, heappop
 
 def get_input():
     input = sys.stdin.readline
@@ -6,21 +7,18 @@ def get_input():
     listk = list(map(int, input().split()))
     edges = []
     for _ in range(M):
-        edges.append(tuple(map(int, input().split()))) # u,v,w
+        u,v,w = map(int, input().split())
+        heappush(edges, (w,u,v))
     return N,listk,edges
 
 
-def solve_fast(N:int, listk:list[int], edges:list[tuple[int,int,int]])->int:
+def solve_fast2(N:int, listk:list[int], edges:list[tuple[int,int,int]])->int:
     '''
-    edges: list of tuple(u,v,w) where w is cost between u and v
+    edges: heapque of tuple(w,u,v) where w is cost between u and v
     use kruscal to complete mst.
     '''
     K = len(listk)
-    edges.sort(key = lambda x: x[2]) # sort by w, ascending
-
     root = list(range(N+1))
-    num_links = 0
-    total_cost = 0
 
     def find_root(a:int)->int:
         if a == root[a]: return a
@@ -30,7 +28,11 @@ def solve_fast(N:int, listk:list[int], edges:list[tuple[int,int,int]])->int:
     # 발전소 노드는 가상의 root(노드-0) child 로 미리 등록.
     for k in listk: root[k] = 0
 
-    for a,b,w in edges:
+    num_links = K
+    total_cost = 0
+
+    while edges:
+        w,a,b = heappop(edges)
         ra,rb = find_root(a), find_root(b)
         if ra == rb: # skip if a,b is in same tree
             continue
@@ -40,12 +42,12 @@ def solve_fast(N:int, listk:list[int], edges:list[tuple[int,int,int]])->int:
             root[a] = root[ra] = rb
         total_cost += w
         num_links += 1
-        if num_links >= N - K:
+        if num_links >= N:
             break
     return total_cost
 
 
 if __name__ == '__main__':
     inp = get_input()
-    r = solve_fast(*inp)
+    r = solve_fast2(*inp)
     print(r)
