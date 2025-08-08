@@ -24,6 +24,7 @@ solved.ac 는 boj site 와 연동 시킬 수 있음. 여기에서 전체 상황�
 
 ## 완료한 문제
 
+8/7,  30797, 가희와 여행가요, 골드4  # mst (kruscal, time-factor, disjkstra)
 8/6,  10423, 전기가 부족해, 골드3   # mst (kruscal, multi-root)
 8/5,  14950, 정복자, 골드4        # mst (prim, kruscal, varying cost)
 8/4,   2146, 다리 만들기, 골드3    # grid, segmentation/dfs, bfs, bruteforce
