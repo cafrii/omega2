@@ -20,22 +20,57 @@ priority_queue<T, vector<T>, greater<T>> pq;
 
 
 ----------------
+kruscal find_root non-recursive!
+
+def find_root(a:int)->int:
+    stack = []
+    while roots[a] != a:
+        stack.append(a)
+        a = roots[a]
+    for b in stack:
+        roots[b] = a
+    return a
+
+
+----------------
 
 
 import sys
+
 def log(fmt, *args): print(fmt % args, file=sys.stderr)
 
 def get_input():
     input = sys.stdin.readline
-    N = int(input().rstrip())
+    N,M = map(int, input().split())
     return ...
 
 def solve():
-    pass
-
+    '''
+    '''
+    return
 
 if __name__ == '__main__':
     inp = get_input()
     r = solve(*inp)
     print(r)
 
+
+----------
+
+# sys.getsizeof deep version
+def getsizeof2(obj, seen=None):
+    import sys
+    if seen is None:
+        seen = set()
+    obj_id = id(obj)
+    if obj_id in seen:
+        return 0
+    seen.add(obj_id)
+    size = sys.getsizeof(obj)
+    if isinstance(obj, dict):
+        size += sum((getsizeof2(k, seen) + getsizeof2(v, seen)) for k, v in obj.items())
+    elif hasattr(obj, '__dict__'):
+        size += getsizeof2(obj.__dict__, seen)
+    elif isinstance(obj, (list, tuple, set, frozenset)):
+        size += sum(getsizeof2(i, seen) for i in obj)
+    return size
