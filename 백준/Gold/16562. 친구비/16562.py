@@ -1,0 +1,172 @@
+'''
+16562번
+친구비
+
+시간 제한	메모리 제한	제출	정답	맞힌 사람	정답 비율
+2 초	512 MB	14307	6313	4806	42.754%
+
+문제
+19학번 이준석은 학생이 N명인 학교에 입학을 했다. 준석이는 입학을 맞아 모든 학생과 친구가 되고 싶어한다.
+하지만 준석이는 평생 컴퓨터랑만 대화를 하며 살아왔기 때문에 사람과 말을 하는 법을 모른다.
+그런 준석이에게도 희망이 있다. 바로 친구비다!
+
+학생 i에게 Ai만큼의 돈을 주면 그 학생은 1달간 친구가 되어준다!
+준석이에게는 총 k원의 돈이 있고 그 돈을 이용해서 친구를 사귀기로 했다.
+막상 친구를 사귀다 보면 돈이 부족해질 것 같다는 생각을 하게 되었다.
+그래서 준석이는 “친구의 친구는 친구다”를 이용하기로 했다.
+
+준석이는 이제 모든 친구에게 돈을 주지 않아도 된다!
+
+위와 같은 논리를 사용했을 때, 가장 적은 비용으로 모든 사람과 친구가 되는 방법을 구하라.
+
+입력
+첫 줄에 학생 수 N (1 ≤ N ≤ 10,000)과 친구관계 수 M (0 ≤ M ≤ 10,000),
+가지고 있는 돈 k (1 ≤ k ≤ 10,000,000)가 주어진다.
+
+두번째 줄에 N개의 각각의 학생이 원하는 친구비 Ai가 주어진다.
+(1 ≤ Ai ≤ 10,000, 1 ≤ i ≤ N)
+
+다음 M개의 줄에는 숫자 v, w가 주어진다. 이것은 학생 v와 학생 w가 서로 친구라는 뜻이다.
+자기 자신과 친구일 수도 있고, 같은 친구 관계가 여러 번 주어질 수도 있다.
+
+출력
+준석이가 모든 학생을 친구로 만들 수 있다면, 친구로 만드는데 드는 최소비용을 출력한다.
+만약 친구를 다 사귈 수 없다면, “Oh no”(따옴표 제거)를 출력한다.
+
+
+------
+
+노드: N (1 ≤ N ≤ 10,000)
+간선: M (0 ≤ M ≤ 10,000)
+예산: k (1 ≤ k ≤ 10,000,000)
+각 노드의 비용: (1 ≤ Ai ≤ 10,000, 1 ≤ i ≤ N)
+
+
+student[], money[] 리스트 구성
+friends 관계 순서대로 dsu 처리. root 에는 그룹 내 최소 비용 (money) 추적.
+friends 처리 완료 후, set 개수 카운트. subtree 의 root 개수 및 money 총합 계산.
+money 총합과 예산과의 비교
+
+----
+알고리즘 개선. 두 포인트.
+1. min cost 를 각 dsu 그룹별로 관리하지 않고, 대신 최소 cost 노드를 각 집합의 root 로 유지하는 전략
+2. 최종 total cost 를 계산하는 중에도 over-budget 감지되면 종료.
+
+
+결과
+97313855 cafrii  16562 맞았습니다!! 34456 52 Python 3 1921B
+97314166 cafrii  16562 맞았습니다!! 34456 48 Python 3 1570B   <- 더 적은 코드로 더 빠르게.
+
+'''
+
+
+import sys
+
+def log(fmt, *args): print(fmt % args, file=sys.stderr)
+
+def get_input():
+    input = sys.stdin.readline
+    N,M,K = map(int, input().split())
+    A = list(map(int, input().split()))
+    # assert len(A) == N, "wrong A size"
+    friends = []
+    for _ in range(M):
+        friends.append(tuple(map(int, input().split())))
+    return N,K,A,friends
+
+
+def solve(N:int, K:int, A:list[int], friends:list[tuple[int,int]])->int:
+    '''
+    Args:
+        A[k]: 노드 k+1 의 cost
+        K: budget
+    Returns:
+        min cost
+        or -1 in case of over-budget
+    '''
+
+    # A 는 index-0 부터 시작하니까 앞에 0을 하나 추가해 주었음.
+    roots, costs = list(range(N+1)), [0]+A
+
+    def find_root(a:int)->int:
+        '''
+        Returns: root, 이 분리 집합의 대표 (subtree root)
+            최소 비용 노드를 root 로 유지함
+        '''
+        if roots[a] == a: return a
+        stack = []
+        while a != roots[a]:
+            stack.append(a)
+            a = roots[a]
+        for k in stack: roots[k] = a
+        return a
+
+    # dsu 구성
+    for a,b in friends:
+        ra,rb = find_root(a),find_root(b)
+        if ra == rb: continue
+        if costs[ra] > costs[rb]:
+            roots[a] = roots[ra] = rb
+        else:
+            roots[b] = roots[rb] = ra
+
+    # log("roots: %s", roots[1:])
+    # log("costs: %s", costs[1:])
+
+    # 각 집합의 대표 수 카운트하면서 소요 비용 합.
+    total_cost = 0
+    for a in range(1,N+1):
+        if a != roots[a]: continue # not root
+        total_cost += costs[a]
+        if total_cost > K: return -1
+
+    return total_cost
+
+
+if __name__ == '__main__':
+    inp = get_input()
+    r = solve(*inp)
+    print(r if r >= 0 else 'Oh no')
+
+
+'''
+예제 입력 1
+5 3 20
+10 10 20 20 30
+1 3
+2 4
+5 4
+예제 출력 1
+20
+
+예제 입력 2
+5 3 10
+10 10 20 20 30
+1 3
+2 4
+5 4
+예제 출력 2
+Oh no
+
+
+run=(python3 16562.py)
+
+echo '5 3 20\n10 10 20 20 30\n1 3\n2 4\n5 4' | $run
+# -> 20
+
+echo '5 3 10\n10 10 20 20 30\n1 3\n2 4\n5 4' | $run
+# -> Oh no
+
+
+echo '5 4 10000\n10 10 20 20 30\n1 3\n2 3\n5 4\n4 3' | $run
+# -> 10
+
+echo '5 1 1000\n1 2 3 4 5\n1 4' | $run
+# -> 11
+
+echo '5 3 20\n10 20 20 10 30\n1 3\n2 4\n5 4' | $run
+# -> 20
+
+
+
+'''
