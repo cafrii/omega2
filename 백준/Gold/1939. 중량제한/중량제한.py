@@ -1,3 +1,4 @@
+
 import sys
 from heapq import heappush, heappop
 
@@ -6,42 +7,69 @@ MAX_W = 1_000_000_000
 def get_input():
     input = sys.stdin.readline
     N,M = map(int, input().split())
-    graph = [ [] for _ in range(N+1) ]
+    edges = []
     for _ in range(M):
-        a,b,w = map(int, input().split())
+        edges.append(tuple(map(int, input().split())))
+    a,b = map(int, input().split())
+    return N,edges,(a,b)
+
+def solve(N:int, edges:list[tuple[int,int,int]], fac:tuple[int,int])->int:
+    '''
+    island number: 1-based. 1~N
+    Returns:
+        max possible weights that can be moved between factories
+    '''
+    # create min-spanning tree (w/ kruscal)
+    # use largest weight edge first
+    edges.sort(key=lambda x: x[2], reverse=True) # sort by weight, descending
+    roots = list(range(N+1))  # 0 ~ N
+
+    def find_root(a:int)->int:
+        if a == roots[a]: return a
+        stack = []
+        while a != roots[a]:
+            stack.append(a)
+            a = roots[a]
+        for k in stack: roots[k] = a
+        return a
+
+    num_edge = 0
+    graph = [ [] for k in range(N+1) ]
+    for a,b,w in edges:
+        ra,rb = find_root(a),find_root(b)
+        if ra == rb: continue # already in same set
+
+        roots[b] = roots[rb] = ra
         graph[a].append((b,w))
         graph[b].append((a,w))
-    a,b = map(int, input().split())
-    return N,graph,(a,b)
+        num_edge += 1
+        if num_edge >= N-1:
+            break
 
-def solve_dijkstra(N:int, graph:list[list[tuple[int,int]]], fac:tuple[int,int])->int:
-    '''
-    '''
-    start,end = fac
+    def dfs2(start:int, end:int)->int:
+        '''
+        stack 에 노드 만 추가하는 방식. weight 는 상태 갱신 과 visited 역할을 같이 수행.
+        '''
+        INF = MAX_W + 1
+        weight = [ INF ] * (N+1)
+        stack = [ start ]
+        weight[start] = MAX_W
+        while stack:
+            cur = stack.pop()
+            pathw = weight[cur]
+            if cur == end: return pathw
+            for nxt,edgew in graph[cur]:
+                if weight[nxt] < INF: continue # already visit
+                stack.append(nxt)
+                weight[nxt] = min(edgew, pathw)
+        return MAX_W # something wrong!
 
-    mxw = [0] * (N+1)
-    # mxw[k]: start 부터 k 까지 탐색된 여러 경로들 중 최대 path weight 값.
-    #         값이 0 이면 아직까지 visit 하지 않은 노드.
+    # find max allowed weights on the path between two factories.
+    return dfs2(*fac)
 
-    que = [(-MAX_W, start)]  # (-overall_weight, node)
-    # max que 로 동작시키기 위해 음의 부호 붙여서 추가
-
-    while que:
-        pathw,cur = heappop(que)
-        pathw = -pathw  # start 부터 cur 현재까지의 경로의 path weight
-
-        if cur == end: # 무조건 먼저 발견되는 것 선택해도 됨. heapq가 최대 pathw 임을 보장하기 때문.
-            return pathw
-
-        for nxt,nxtw in graph[cur]:
-            w = min(pathw, nxtw)
-            if mxw[nxt] < w:
-                mxw[nxt] = w
-                heappush(que, (-w, nxt))
-
-    return mxw[end] # 여기까지 오는 경우는 없음.
 
 if __name__ == '__main__':
     inp = get_input()
-    r = solve_dijkstra(*inp)
+    r = solve(*inp)
     print(r)
+
