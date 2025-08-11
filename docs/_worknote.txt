@@ -24,7 +24,8 @@ solved.ac 는 boj site 와 연동 시킬 수 있음. 여기에서 전체 상황�
 
 ## 완료한 문제
 
-8/10, 16562, 친구비, 골드4,       # dsu (disjoint set union)
+8/11,  1939, 중량제한, 골드3       # dsu modified (loop exit condition)
+8/10, 16562, 친구비, 골드4        # dsu (disjoint set union)
 8/10,  2350, 대운하, 골드2        # lca, mst/kruscal, dfs, tree search
 8/9,   3584, 가장 가까운 공통 조상, 골드4  # lca (lowest common ancestor), (branch-set or level match)
 8/8,   6497, 전력난, 골드4        # mst (kruscal)
