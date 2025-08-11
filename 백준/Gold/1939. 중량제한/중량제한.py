@@ -1,4 +1,3 @@
-
 import sys
 from heapq import heappush, heappop
 
@@ -7,22 +6,17 @@ MAX_W = 1_000_000_000
 def get_input():
     input = sys.stdin.readline
     N,M = map(int, input().split())
-    edges = []
+    graph = [ [] for _ in range(N+1) ]
     for _ in range(M):
-        edges.append(tuple(map(int, input().split())))
-    a,b = map(int, input().split())
-    return N,edges,(a,b)
-
-
-def solve_dijkstra(N:int, edges:list[tuple[int,int,int]], fac:tuple[int,int])->int:
-    '''
-
-    '''
-    graph = [ [] for k in range(N+1) ]
-    for a,b,w in edges:
+        a,b,w = map(int, input().split())
         graph[a].append((b,w))
         graph[b].append((a,w))
+    a,b = map(int, input().split())
+    return N,graph,(a,b)
 
+def solve_dijkstra(N:int, graph:list[list[tuple[int,int]]], fac:tuple[int,int])->int:
+    '''
+    '''
     start,end = fac
 
     mxw = [0] * (N+1)
@@ -46,7 +40,6 @@ def solve_dijkstra(N:int, edges:list[tuple[int,int,int]], fac:tuple[int,int])->i
                 heappush(que, (-w, nxt))
 
     return mxw[end] # 여기까지 오는 경우는 없음.
-
 
 if __name__ == '__main__':
     inp = get_input()
