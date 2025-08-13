@@ -3,11 +3,11 @@ from typing import Iterator
 
 def get_input():
     input = sys.stdin.readline
-    G = int(input().rstrip())
-    P = int(input().rstrip())
+    G = int(input())
+    P = int(input())
     def gen():
         for i in range(P):
-            gi = int(input().rstrip())
+            gi = int(input())
             yield i,gi
         return
     return G,P,gen()
@@ -18,6 +18,9 @@ def solve(G:int, P:int, it:Iterator)->int:
         gi is gate index (1-based) for plane will arrive at,
         seq is sequence index of iteration (start from 0)
     '''
+    lm = sys.getrecursionlimit()
+    sys.setrecursionlimit(max(lm, P+50))
+
     gates = list(range(G+1))
     # gates[k]: k번 gate 의 상태 정보
     #   k: 이 gate가 available 하면 자신 gate 번호.
@@ -28,17 +31,13 @@ def solve(G:int, P:int, it:Iterator)->int:
 
     def find_root(a:int)->int:
         if a == gates[a]: return a
-        stack = []
-        while a != gates[a]:
-            stack.append(a)
-            a = gates[a]
-        for s in stack: gates[s] = a
-        return a
+        gates[a] = ra = find_root(gates[a])
+        return ra
 
     for i,a in it:
         ra = find_root(a)
         if ra == 0: return i  # all gates (< a) occupied
-        gates[ra] = find_root(ra-1)
+        gates[ra] = gates[a] = find_root(ra-1)
 
     return P
 
