@@ -24,6 +24,7 @@ solved.ac 는 boj site 와 연동 시킬 수 있음. 여기에서 전체 상황�
 
 ## 완료한 문제
 
+8/12, 10775, 공항, 골드2          # dsu, path compression
 8/11,  1939, 중량제한, 골드3       # dsu modified (loop exit condition)
 8/10, 16562, 친구비, 골드4        # dsu (disjoint set union)
 8/10,  2350, 대운하, 골드2        # lca, mst/kruscal, dfs, tree search
