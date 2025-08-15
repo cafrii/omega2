@@ -16,8 +16,8 @@ def test_compare(inp:str):
     if out1.rstrip() != out2.rstrip():
         print(f'assert failed!')
         print(f'inp: =={inp}==')
-        print(f'out1: **{out1.rstrip()}**, ##{out1e.rstrip()}##')
-        print(f'out2: **{out2.rstrip()}**, ##{out2e.rstrip()}##')
+        print(f'out1: **{out1.rstrip()}**, ##{out1e.rstrip() if out1e else ''}##')
+        print(f'out2: **{out2.rstrip()}**, ##{out2e.rstrip() if out2e else ''}##')
         assert False, "answer mismatch"
     log("==== ok, same!")
     # print(out1.rstrip())
