@@ -1,6 +1,5 @@
-
 import sys
-from collections import defaultdict
+from collections import defaultdict, deque
 
 def get_input():
     input = sys.stdin.readline
@@ -17,8 +16,8 @@ def solve(N:int, links:list[tuple[int,int]])->list[int]:
     구성이 완료되면 각 그룹별로 최소 깊이를 갖는 트리를 구성하고 root 선택.
     '''
     # 재귀 호출 깊이.
-    lm = sys.getrecursionlimit() # 보통은 1000 인데 특수한 런타임 대비
-    sys.setrecursionlimit(max(lm, N+50))
+    #lm = sys.getrecursionlimit() # 보통은 1000 인데 특수한 런타임 대비
+    #sys.setrecursionlimit(max(lm, N+50))
 
     INF = 999 # >N+1 이기만 하면 됨
 
@@ -55,28 +54,24 @@ def solve(N:int, links:list[tuple[int,int]])->list[int]:
     organize()
 
     # 각 노드 별로 소속 그룹 내 순회를 통해 최장 거리 계산
-    def find_dist_dfs(start:int)->int:
-        '''
-        Args: start
-        Returns: 이 그룹의 대표자 노드
-        '''
-        dists = [ INF ] * (N+1) # distance from start. visited 목적으로도 활용
-        stack = [ start ]
-        dists[start] = 0
-        while stack:
-            cur = stack.pop()
-            d = dists[cur]
+    def find_dist_bfs(start:int)->int:
+        visited = [0]*(N+1)
+        que = deque()
+        d = 0
+        que.append((d, start))
+        visited[start] = 1
+        while que:
+            d,cur = que.popleft()
             for nxt in graph[cur]:
                 if nxt == cur: continue
-                if dists[nxt] <= d+1: continue
-                stack.append(nxt)
-                dists[nxt] = d+1
-        maxdist = max(d for d in dists if d < INF)
-        return maxdist
+                if visited[nxt]: continue
+                que.append((d+1, nxt))
+                visited[nxt] = 1
+        return d
 
     chieves = [ ] # 그룹 대표 목록
     for members in groups.values():
-        _,m = min([ (find_dist_dfs(m),m) for m in members ])
+        _,m = min([ (find_dist_bfs(m),m) for m in members ])
         chieves.append(m)
 
     return [ len(groups) ] + sorted(chieves)
@@ -86,4 +81,3 @@ if __name__ == '__main__':
     inp = get_input()
     r = solve(*inp)
     print('\n'.join(map(str, r)))
-
