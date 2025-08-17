@@ -24,6 +24,7 @@ solved.ac 는 boj site 와 연동 시킬 수 있음. 여기에서 전체 상황�
 
 ## 완료한 문제
 
+8/17, 17255, N으로 만들기, 골드4  # brue-force, dfs, backtracking
 8/16, 14497, 주난의 난, 골드4    # 0-1-bfs, modified dijkstra, grid
 8/15,  2610, 회의준비, 골드2      # dsu, floyd-warshall, bfs, dfs
 8/14,  1043, 거짓말, 골드4       # dsu
