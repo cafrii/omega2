@@ -1,36 +1,28 @@
-
 import sys
 
 def get_input():
     input = sys.stdin.readline
     return input().rstrip()
 
-def solve_fast(digitstr:str):
+def solve_opt(digitstr:str):
     '''
+    solve_fast 에서 개선. 완성된 숫자에서 거꾸로 역추적.
+    sliced index 위치 관리가 불필요하여 더 간편함.
     '''
-    length = len(digitstr)
-    dlist = [ s for s in digitstr ]
     history_set = set()
 
-    def search(left:int, right:int, hist:str):
-        '''
-        left, right: 현재 채워져 있는 숫자 그룹의 왼쪽/오른쪽 경계.
-            slice 노테이션을 따른다.
-        '''
-        if right - left >= length:
-            if hist in history_set: return # duplicate!
+    def back(dstr:str, hist:str):
+        # dstr 라는 숫자가 완성되는 경우를 역추적.
+        hist = dstr + hist
+        if len(dstr) == 1:
             history_set.add(hist)
-            return
-        if left > 0: # 왼쪽 채우기
-            search(left-1, right, hist + ',' + ''.join(dlist[left-1:right]))
-        if right < length: # 오른쪽 채우기
-            search(left, right+1, hist + ',' + ''.join(dlist[left:right+1]))
+        else:
+            back(dstr[1:], hist) # 왼쪽 숫자 잘라내기
+            back(dstr[:-1], hist) # 오른쪽 숫자 잘라내기
         return
 
-    for i,d in enumerate(dlist):
-        search(i, i+1, d)
+    back(digitstr, '')
     return len(history_set)
 
 if __name__ == '__main__':
-    print(solve_fast(get_input()))
-
+    print(solve_opt(get_input()))
