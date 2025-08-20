@@ -24,6 +24,7 @@ solved.ac 는 boj site 와 연동 시킬 수 있음. 여기에서 전체 상황�
 
 ## 완료한 문제
 
+8/20, 13335, 트럭, 실버1         # queue
 8/19, 14425, 문자열 집합, 실버4    # set, string
 8/18, 27440, 1로 만들기 3, 골드4  # bfs, (dfs!), dp(?), haspmap
 8/17, 17255, N으로 만들기, 골드4  # brue-force, dfs, backtracking
