@@ -24,6 +24,7 @@ solved.ac 는 boj site 와 연동 시킬 수 있음. 여기에서 전체 상황�
 
 ## 완료한 문제
 
+8/25, 14567, 선수과목, 골드5     # topological sort, dp
 8/24,  2293, 동전 1, 골드4      # staged/layered dp
 8/23, 11478, 서로 다른 부분 문자열의 개수, 실버3  # set, hash, string
 8/22,  9660, 돌게임 6, 골드5     # game theory, math
