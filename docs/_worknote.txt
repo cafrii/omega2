@@ -2,6 +2,9 @@
 https://solved.ac/profile/cafrii
 solved.ac 는 boj site 와 연동 시킬 수 있음. 여기에서 전체 상황을 보고 원하는 문제를 골라 풀 수 있음.
 
+시험용 계정: bojstarter, cxxxxglv@gmail
+
+
 ## NOTES
 - 2025/4/10, 그래프 문제에서 시각화 된 그래프 확인하기. 나름 도움이 되는데, 노드 수가 많아지면 이마저도 쉽지 않음.
   - https://csacademy.com/app/graph_editor/
@@ -24,6 +27,7 @@ solved.ac 는 boj site 와 연동 시킬 수 있음. 여기에서 전체 상황�
 
 ## 완료한 문제
 
+8/27, 17845, 수강 과목, 골드5     # 0-1 knapsack, dp2d, dp, backtrack
 8/26, 12891, DNA 비밀번호, 실버2  # string, sliding window, dict
 8/25, 14567, 선수과목, 골드5     # topological sort, dp
 8/24,  2293, 동전 1, 골드4      # staged/layered dp
