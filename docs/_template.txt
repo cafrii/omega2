@@ -51,8 +51,8 @@ def solve():
 
 if __name__ == '__main__':
     inp = get_input()
-    r = solve(*inp)
-    print(r)
+    print(solve(*inp))
+    #print(solve(*get_input()))
 
 
 ----------

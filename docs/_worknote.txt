@@ -27,6 +27,7 @@ solved.ac 는 boj site 와 연동 시킬 수 있음. 여기에서 전체 상황�
 
 ## 완료한 문제
 
+9/1,   2591, 숫자카드, 골드5     # dp
 8/31,  1439, 뒤집기, 실버5      # string, math?
 8/30,  1755, 숫자놀이, 실버5     # string, sort
 8/29, 14426, 접두사 찾기, 실버1   # binary search, string prefix
