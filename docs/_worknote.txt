@@ -2,7 +2,9 @@
 https://solved.ac/profile/cafrii
 solved.ac 는 boj site 와 연동 시킬 수 있음. 여기에서 전체 상황을 보고 원하는 문제를 골라 풀 수 있음.
 
-계정: bojstarter, cxxxxglv@gmail
+계정: cafrii, cxxdst at gmail
+계정: bojstarter, cxxxxglv at gmail
+계정: gcn8099, cxxseoul gmail, chrompswd
 
 
 ## NOTES
