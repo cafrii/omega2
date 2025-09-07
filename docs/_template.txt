@@ -50,8 +50,8 @@ def solve():
     return
 
 if __name__ == '__main__':
-    inp = get_input()
-    print(solve(*inp))
+    r = solve(*get_input())
+    print(r)
     #print(solve(*get_input()))
 
 
