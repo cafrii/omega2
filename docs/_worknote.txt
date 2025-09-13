@@ -29,6 +29,7 @@ solved.ac 는 boj site 와 연동 시킬 수 있음. 여기에서 전체 상황�
 
 ## 완료한 문제
 
+9/13, 16174, 점프왕 쩰리 (Large) 실버1  # dp-2d
 9/12, 15991, 1,2,3 더하기 6, 실버1  # dp
 9/11, 12026, BOJ 거리, 실버1      # dp, fwd update
 9/10,  3067, Coins, 골드5        # dp bottom-up layered
