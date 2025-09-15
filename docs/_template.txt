@@ -74,3 +74,15 @@ def getsizeof2(obj, seen=None):
     elif isinstance(obj, (list, tuple, set, frozenset)):
         size += sum(getsizeof2(i, seen) for i in obj)
     return size
+
+
+
+def stdout_to_str(fn):
+    import sys, io
+    stdout0 = sys.stdout
+    sys.stdout = io.StringIO()
+    fn()
+    res = sys.stdout
+    sys.stdout = stdout0 # restore
+    return restore
+
