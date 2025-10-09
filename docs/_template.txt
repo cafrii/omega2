@@ -37,7 +37,11 @@ def find_root(a:int)->int:
 
 import sys
 
-def log(fmt, *args): print(fmt % args, file=sys.stderr)
+#def log(fmt, *args): print(fmt % args, file=sys.stderr)
+log = (lambda fmt, *args: print(fmt % args, file=sys.stderr)) \
+    if __import__('os').getenv('DBG') else (lambda *args, **kwargs: None)
+
+
 
 def get_input():
     input = sys.stdin.readline
@@ -50,6 +54,9 @@ def solve():
     return
 
 if __name__ == '__main__':
+    #inp = get_input()
+    #print(solve(*inp))
+    #r = solve(*inp)
     #r = solve(*get_input())
     #print(r)
     print(solve(*get_input()))
