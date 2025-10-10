@@ -26,6 +26,7 @@ solved.ac 는 boj site 와 연동 시킬 수 있음. 여기에서 전체 상황�
 
 ## 완료한 문제
 
+10/10, 3407, 맹세, 실버1            # dp, hashing
 10/9,  2705, 팰린드롬 파티션, 실버1    # dp, recursive(dfs)
 10/8, 29704, 벼락치기, 골드5         # dp, 0-1 knapsack
 10/7, 15482, 한글 LCS, 골드5        # dp, lcs
