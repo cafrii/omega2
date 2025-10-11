@@ -35,15 +35,13 @@ def find_root(a:int)->int:
 ----------------
 
 
-import sys
-
 #def log(fmt, *args): print(fmt % args, file=sys.stderr)
 log = (lambda fmt, *args: print(fmt % args, file=sys.stderr)) \
     if __import__('os').getenv('DBG') else (lambda *args, **kwargs: None)
 
 
-
 def get_input():
+    import sys
     input = sys.stdin.readline
     N,M = map(int, input().split())
     return ...
