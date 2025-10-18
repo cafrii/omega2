@@ -33,31 +33,42 @@ def find_root(a:int)->int:
 
 
 ----------------
+# python
 
+import sys
 
-#def log(fmt, *args): print(fmt % args, file=sys.stderr)
 log = (lambda fmt, *args: print(fmt % args, file=sys.stderr)) \
     if __import__('os').getenv('DBG') else (lambda *args, **kwargs: None)
 
-
 def get_input():
-    import sys
     input = sys.stdin.readline
     N,M = map(int, input().split())
     return ...
 
-def solve():
+def solve(N:int, M:int)->int:
     '''
+    Args:
+    Returns:
     '''
     return
 
 if __name__ == '__main__':
-    #inp = get_input()
-    #print(solve(*inp))
-    #r = solve(*inp)
-    #r = solve(*get_input())
-    #print(r)
     print(solve(*get_input()))
+
+----------
+ts
+
+const input: string[] = require("fs")
+  .readFileSync(filePath).toString().trim().split("\n");
+
+const input = require('fs').readFileSync("/dev/stdin").toString().trim();
+const [[N, M, V], ...edges] = input.map((line) => line.split(" ").map(Number));
+const [N, M] = input[0].split(" ").map((el) => parseInt(el));
+
+...
+
+console.log(answer.join(" "))
+
 
 
 ----------
