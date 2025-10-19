@@ -48,3 +48,35 @@ npm init -y
 npm install --save-dev typescript
 ```
 
+- 문제 풀이를 위한 필수 패키지들
+```
+npm i -D @types/node
+
+npm i -D ts-node
+
+```
+
+- tsconfig 생성
+```
+npx tsc --init
+```
+
+- tsconfig.json 수정. types 에 "node" 추가.
+```
+vi tsconfig.json
+...
+    "types": ["node"],
+
+```
+
+- 실행하기
+```
+npx ts-node <file>.ts
+```
+
+## 문제 해결
+- git clone 후 처음 설치
+```
+npm install
+```
+

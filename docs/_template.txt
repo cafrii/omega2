@@ -59,7 +59,7 @@ if __name__ == '__main__':
 ts
 
 const input: string[] = require("fs")
-  .readFileSync(filePath).toString().trim().split("\n");
+  .readFileSync("/dev/stdin").toString().trim().split("\n");
 
 const input = require('fs').readFileSync("/dev/stdin").toString().trim();
 const [[N, M, V], ...edges] = input.map((line) => line.split(" ").map(Number));
