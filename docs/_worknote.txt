@@ -13,6 +13,11 @@ solved.ac 는 boj site 와 연동 시킬 수 있음. 여기에서 전체 상황�
 - 우선순위 큐: https://www.acmicpc.net/problemset?sort=ac_desc&algo=59
   - 최대 힙에서 자체 구현을 한번 해 보았으니, 이후부터는 파이썬 heapq 를 활용하도록 한다.
 - 2025년 3월, dynamic programming 파트: https://www.acmicpc.net/problemset?sort=ac_desc&algo=25
+- typescript 관련:
+  - ts 연습도 할 겸 문제 풀이에 사용해 보려고 했으나, 불필요한 타입 가드 코드가 많이 필요하여 상당히 번거로움.
+  - tsconfig 에서 모든 strict 한 검사를 비활성화 하면 되는데, 잘못된 ts 코딩 습관이 될 듯 하여 중단함.
+  - 12847 (silver 3) 한 문제만 시험적으로 시도해 보았음.
+
 
 ## 쉽게 풀릴 만한 문제들 간추림
 - 27440, 1로 만들기 3, 골드4
