@@ -31,6 +31,7 @@ solved.ac 는 boj site 와 연동 시킬 수 있음. 여기에서 전체 상황�
 
 ## 완료한 문제
 
+10/23,  2240, 자두나무, 골드4       # dp
 10/22,  2631, 줄세우기, 골드4       # dp, lis
 10/21,  3020, 인간 컴퓨터 상호작용, 실버1  # cumulative sum
 10/20, 12847, 꿀 아르바이트, 실버3    # two pointer, sliding window
