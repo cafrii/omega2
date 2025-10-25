@@ -31,6 +31,7 @@ solved.ac 는 boj site 와 연동 시킬 수 있음. 여기에서 전체 상황�
 
 ## 완료한 문제
 
+10/25, 20002, 사과나무, 골드5       # bruteforce, cumulative sum 2d
 10/24,  4811, 알약, 골드5          # dp2d
 10/23,  2240, 자두나무, 골드4       # dp
 10/22,  2631, 줄세우기, 골드4       # dp, lis
@@ -39,7 +40,7 @@ solved.ac 는 boj site 와 연동 시킬 수 있음. 여기에서 전체 상황�
 10/19,  2559, 수열, 실버3           # two pointer, sliding window
 10/18, 16507, 어두운 건 무서워, 실버1  # cumulative sum 2d
 10/17, 21318, 피아노 체조, 실버1      # cumulative sum
-10/16,  1749, 점수따먹기, 골드4       # kadane, prefix sum 2d. 개선 필요!
+10/16,  1749, 점수따먹기, 골드4       # kadane, prefix sum 2d. 개선 필요!!!!!!
 10/15, 14925, 목장 건설하기, 골드4     # dp-2d, partial sum
 10/14, 17485, 진우의 달 여행 (Large)  # dp-3d
 10/13, 16974, 레벨 햄버거, 골드5      # dp, recursive call
