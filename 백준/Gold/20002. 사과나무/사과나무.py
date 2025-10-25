@@ -10,6 +10,8 @@ def get_input():
 
 def solve(N:int, A:list[list[int]])->int:
     '''
+    최적화
+    함수 호출 대신 inlining. 반복되는 +1 연산을 쓰지 않도록 좌표 기준 변경.
     Args:
     Returns:
     '''
@@ -25,28 +27,18 @@ def solve(N:int, A:list[list[int]])->int:
             asum_x[x] = asum_x[x-1] + A[y-1][x-1]
             asum[y][x] = asum[y-1][x] + asum_x[x]
 
-    # 이후부터는 모두 zero-based index.
-    def partial_sum2(k:int,y2:int,x2:int)->int:
-        # 한변의 길이 k, 우하단 좌표 (y2,x2)
-        y1,x1 = y2-k+1,x2-k+1
-        return asum[y2+1][x2+1] - asum[y1][x2+1] - asum[y2+1][x1] + asum[y1][x1]
-
     maxval = -INF
-
     # K은 내부 정사각형 영역의 한변의 길이
     for k in range(2, N+1): # k: 2 ~ N
-        # (y, x)는 정사각 영역의 우하단 좌표
-        for y in range(k-1, N): # y: k-1 ~ N-1
-            for x in range(k-1, N):
-                # maxval = max(partial_sum2(k, y, x), maxval)
-                v = partial_sum2(k, y, x)
+        # (y2, x2)는 정사각 영역의 우하단 좌표 + 1
+        for y2 in range(k, N+1): # y: k ~ N
+            for x2 in range(k, N+1):
+                y1,x1 = y2-k,x2-k
+                v = asum[y2][x2] - asum[y1][x2] - asum[y2][x1] + asum[y1][x1]
                 if maxval < v: maxval = v
-
     # 크기 1짜리 고려
     maxval = max(maxval, max(max(al) for al in A))
     return maxval
 
-
 if __name__ == '__main__':
     print(solve(*get_input()))
-
