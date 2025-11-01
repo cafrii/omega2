@@ -83,8 +83,29 @@ def solve(N:int, A:list[int])->int:
 
     return maxval
 
+
+
+def solve2(N:int, A:list[int])->int:
+    '''
+    https://www.acmicpc.net/source/96474283
+
+    좀 더 빠른 해 인데... 얼른 읽히진 않음.
+
+    '''
+    # 2를 -1로 대체
+    b = [0] + [ (-1 if a==2 else a) for a in A ]
+
+    for i in range(1, N+1):
+        b[i] += b[i - 1]
+
+    # 왜 이렇게만 해도 답이 되는지는 잘 모르겠음.
+    return max(b) - min(b)
+
+
 if __name__ == '__main__':
     print(solve(*get_input()))
+
+    # print(solve2(*get_input()))
 
 
 
