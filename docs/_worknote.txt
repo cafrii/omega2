@@ -30,6 +30,7 @@ solved.ac 는 boj site 와 연동 시킬 수 있음. 여기에서 전체 상황�
 
 
 ## 완료한 문제
+11/11, 25947, 선물할인, 실버1       # greedy, sorting
 11/10, 10713, 기차 여행, 골드4      # diff array, prefix sum
 11/9,   4095, 최대 정사각형, 골드4   # dp2d, dual dp(1d)
 11/8,  21758, 꿀 따기, 골드5       # greedy, prefix sum
